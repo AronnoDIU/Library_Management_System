@@ -1,8 +1,8 @@
 class Book {
-    private final String title;
-    private final String author;
-    private final String genre;
-    private boolean checkedOut;
+    private final String title; // Title of the book
+    private final String author; // Author of the book
+    private final String genre; // Genre of the book
+    private boolean checkedOut; // Whether the book is checked out
 
     public Book(String title, String author, String genre) {
         this.title = title;

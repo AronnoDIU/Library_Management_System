@@ -27,18 +27,29 @@ public class LibraryManagementSystem {
                     String author = userInput.nextLine();
                     System.out.print("Enter genre: ");
                     String genre = userInput.nextLine();
+
+                    // Create a new Book object
                     Book newBook = new Book(title, author, genre);
-                    library.addBook(newBook);
+                    library.addBook(newBook); // Add the new book to the library
+
                     System.out.println("Book added successfully.\n");
                     break;
 
                 case 2:
-                    library.displayBooks();
+                    library.displayBooks(); // Display the list of books
+
                     System.out.print("Enter the title of the book to remove: ");
                     String removeTitle = userInput.nextLine();
+
+                    // Remove the book from the library
                     Book bookToRemove = library.findBook(removeTitle);
+
+                    // Check if the book was found
                     if (bookToRemove != null) {
+
+                        // Remove the book from the library
                         library.removeBook(bookToRemove);
+
                         System.out.println("Book removed successfully.\n");
                     } else {
                         System.out.println("Book not found.\n");
@@ -46,17 +57,27 @@ public class LibraryManagementSystem {
                     break;
 
                 case 3:
-                    library.displayBooks();
+                    library.displayBooks(); // Display the list of books
                     break;
 
                 case 4:
                     library.displayBooks();
+
                     System.out.print("Enter the title of the book to check out: ");
                     String checkOutTitle = userInput.nextLine();
+
+                    // Check out the book from the library
                     Book bookToCheckOut = library.findBook(checkOutTitle);
+
+                    // Check if the book was found
                     if (bookToCheckOut != null) {
+
+                        // Check out the book from the library
                         if (!bookToCheckOut.isCheckedOut()) {
+
+                            // Check out the book
                             bookToCheckOut.checkOut();
+
                             System.out.println("Book checked out successfully.\n");
                         } else {
                             System.out.println("Book is already checked out.\n");
@@ -68,12 +89,21 @@ public class LibraryManagementSystem {
 
                 case 5:
                     library.displayBooks();
+
                     System.out.print("Enter the title of the book to check in: ");
                     String checkInTitle = userInput.nextLine();
+
                     Book bookToCheckIn = library.findBook(checkInTitle);
+
+                    // Check if the book was found
                     if (bookToCheckIn != null) {
+
+                        // Check in the book
                         if (bookToCheckIn.isCheckedOut()) {
+
+                            // Check in the book from the library
                             bookToCheckIn.checkIn();
+
                             System.out.println("Book checked in successfully.\n");
                         } else {
                             System.out.println("Book is not checked out.\n");
@@ -86,7 +116,11 @@ public class LibraryManagementSystem {
                 case 6:
                     System.out.print("Enter search keyword (title/author/genre): ");
                     String searchKeyword = userInput.nextLine();
+
+                    // Search for the book
                     Book foundBook = library.findBook(searchKeyword);
+
+                    // Check if the book was found
                     if (foundBook != null) {
                         System.out.println("Book found:");
                         System.out.println("Title: " + foundBook.getTitle() + ", Author: " + foundBook.getAuthor() +
