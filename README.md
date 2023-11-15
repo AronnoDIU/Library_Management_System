@@ -17,8 +17,7 @@ reports.
 
 - Book catalog: Allows librarians to add, update, and remove books from the library's collection.
 - User management: Enables librarians to create and manage user accounts, including issuing library cards.
-- Book borrowing and returning: Facilitates the process of borrowing and returning books, with due date tracking and
-  reminders.
+- Book borrowing and returning: Facilitates the process of borrowing and returning books, with due date tracking and reminders.
 - Search and filtering: Provides a search functionality to quickly find books by title, author, or category.
 - Reports and statistics: Generates reports on book availability, popular books, and fines collected.
 

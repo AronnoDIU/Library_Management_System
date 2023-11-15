@@ -10,9 +10,9 @@ public class LibraryManagementSystem {
         Scanner userInput = new Scanner(System.in);
 
         while (true) {
-            displayMenu();
+            displayMenu(); // Display the menu and get the user's choice from the input stream
 
-            int choice = getUserChoice(userInput);
+            int choice = getUserChoice(userInput); // Get the user's choice
 
             switch (choice) {
                 case 1: // For Add book
@@ -157,8 +157,7 @@ public class LibraryManagementSystem {
         System.out.print("Enter search keyword (title/author/genre): ");
         String searchKeyword = userInput.nextLine();
 
-        // Search for the book
-        Book foundBook = library.findBook(searchKeyword);
+        Book foundBook = library.findBook(searchKeyword); // Search for the book
 
         // Check if the book was found
         if (foundBook != null) {
@@ -186,7 +185,8 @@ public class LibraryManagementSystem {
             }
             System.out.println("Library information loaded from 'library.txt'.");
         } catch (IOException e) { // If an error occurs while reading the file
-            System.out.println("Error reading library information from file. Starting with an empty library.");
+            System.out.println("Error reading library information from file. " +
+                                                "Starting with an empty library.");
         }
     }
 
