@@ -37,11 +37,16 @@ class Library {
             // Check if the book was found
             if (book.getTitle().equalsIgnoreCase(keyword) ||
                     book.getAuthor().equalsIgnoreCase(keyword) ||
-                        book.getGenre().equalsIgnoreCase(keyword)) {
+                    book.getGenre().equalsIgnoreCase(keyword)) {
 
                 return book;
             }
         }
         return null; // Return null if the book was not found
+    }
+
+    // Getter for the list of books
+    public List<Book> getBooks() {
+        return books;
     }
 }
