@@ -33,13 +33,22 @@ public class LibraryManagementSystem {
                 case 6: // For search
                     searchBook(userInput, library);
                     break;
-                case 7: // For exit
+                case 7: // For add user
+                    addUser(userInput, library);
+                    break;
+                case 8: // For remove user
+                    removeUser(userInput, library);
+                    break;
+                case 9: // For display user
+                    library.displayUsers();
+                    break;
+                case 10: // For exit
                     saveLibraryToFile(library);
                     System.out.println("Exiting Library Management System. Goodbye!");
                     System.exit(0);
                     break;
                 default: // For invalid choice
-                    System.out.println("Invalid choice. Please enter a number between 1 and 7.\n");
+                    System.out.println("Invalid choice. Please enter a number between 1 and 10.\n");
                     break;
             }
         }
@@ -54,7 +63,10 @@ public class LibraryManagementSystem {
         System.out.println("4. Check Out Book");
         System.out.println("5. Check In Book");
         System.out.println("6. Search Book");
-        System.out.println("7. Exit");
+        System.out.println("7. Add User");
+        System.out.println("8. Remove User");
+        System.out.println("9. Display Users");
+        System.out.println("10. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -170,7 +182,36 @@ public class LibraryManagementSystem {
         }
     }
 
-    // Read library information from the file and add it to the library
+    private static void addUser(Scanner userInput, Library library) {
+        userInput.nextLine();
+        System.out.print("Enter user name: ");
+        String name = userInput.nextLine();
+        System.out.print("Enter user ID: ");
+        String userId = userInput.nextLine();
+
+        User newUser = new User(name, userId);
+        library.addUser(newUser);
+
+        System.out.println("User added successfully.\n");
+    }
+
+    private static void removeUser(Scanner userInput, Library library) {
+        userInput.nextLine();
+        library.displayUsers();
+
+        System.out.print("Enter the user ID to remove: ");
+        String userId = userInput.nextLine();
+
+        User userToRemove = library.findUser(userId);
+
+        if (userToRemove != null) {
+            library.removeUser(userId);
+            System.out.println("User removed successfully.\n");
+        } else {
+            System.out.println("User not found.\n");
+        }
+    }
+
     private static void readLibraryFromFile(Library library) {
 
         // Read library information from the file

@@ -1,11 +1,15 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class Library {
-    private final List<Book> books; // List of books in the library
+    private final List<Book> books;
+    private final Map<String, User> users;
 
     public Library() {
-        this.books = new ArrayList<>(); // Initialize the list of books in the library
+        this.books = new ArrayList<>();
+        this.users = new HashMap<>();
     }
 
     public void addBook(Book book) {
@@ -48,5 +52,25 @@ class Library {
     // Getter for the list of books
     public List<Book> getBooks() {
         return books;
+    }
+
+    public void addUser(User user) {
+        users.put(user.getUserId(), user);
+    }
+
+    public void removeUser(String userId) {
+        users.remove(userId);
+    }
+
+    public User findUser(String userId) {
+        return users.get(userId);
+    }
+
+    public void displayUsers() {
+        System.out.println("Library Users:");
+        for (User user : users.values()) {
+            System.out.println("Name: " + user.getName() + ", User ID: " + user.getUserId());
+        }
+        System.out.println();
     }
 }
