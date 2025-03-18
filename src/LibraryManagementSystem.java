@@ -42,13 +42,22 @@ public class LibraryManagementSystem {
                 case 9: // For display user
                     library.displayUsers();
                     break;
-                case 10: // For exit
+                case 10:  // For add reservation
+                    addReservation(userInput, library);
+                    break;
+                case 11: // For remove reservation
+                    removeReservation(userInput, library);
+                    break;
+                case 12: // For display reservation
+                    library.displayReservations();
+                    break;
+                case 13: // For exit
                     saveLibraryToFile(library);
                     System.out.println("Exiting Library Management System. Goodbye!");
                     System.exit(0);
                     break;
-                default: // For invalid choice
-                    System.out.println("Invalid choice. Please enter a number between 1 and 10.\n");
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 14.\n");
                     break;
             }
         }
@@ -66,7 +75,10 @@ public class LibraryManagementSystem {
         System.out.println("7. Add User");
         System.out.println("8. Remove User");
         System.out.println("9. Display Users");
-        System.out.println("10. Exit");
+        System.out.println("10. Add Reservation");
+        System.out.println("11. Remove Reservation");
+        System.out.println("12. Display Reservations");
+        System.out.println("13. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -265,6 +277,45 @@ public class LibraryManagementSystem {
             System.out.println("Library information saved to 'library.txt'.");
         } catch (IOException e) { // If an error occurs while writing to the file
             System.out.println("Error saving library information to file.");
+        }
+    }
+
+    private static void addReservation(Scanner userInput, Library library) {
+        userInput.nextLine();
+        System.out.print("Enter user ID: ");
+        String userId = userInput.nextLine();
+        System.out.print("Enter book title: ");
+        String bookTitle = userInput.nextLine();
+        System.out.print("Enter reservation date (YYYY-MM-DD): ");
+        String reservationDate = userInput.nextLine();
+
+        Reservation newReservation = new Reservation(userId, bookTitle, reservationDate);
+        library.addReservation(newReservation);
+
+        System.out.println("Reservation added successfully.\n");
+    }
+
+    private static void removeReservation(Scanner userInput, Library library) {
+        library.displayReservations();
+
+        System.out.print("Enter the user ID of the reservation to remove: ");
+        String userId = userInput.nextLine();
+        System.out.print("Enter the book title of the reservation to remove: ");
+        String bookTitle = userInput.nextLine();
+
+        Reservation reservationToRemove = null;
+        for (Reservation reservation : library.getReservations()) {
+            if (reservation.getUserId().equals(userId) && reservation.getBookTitle().equals(bookTitle)) {
+                reservationToRemove = reservation;
+                break;
+            }
+        }
+
+        if (reservationToRemove != null) {
+            library.removeReservation(reservationToRemove);
+            System.out.println("Reservation removed successfully.\n");
+        } else {
+            System.out.println("Reservation not found.\n");
         }
     }
 }

@@ -6,10 +6,12 @@ import java.util.Map;
 class Library {
     private final List<Book> books;
     private final Map<String, User> users;
+    private final List<Reservation> reservations;
 
     public Library() {
         this.books = new ArrayList<>();
         this.users = new HashMap<>();
+        this.reservations = new ArrayList<>();
     }
 
     public void addBook(Book book) {
@@ -70,6 +72,27 @@ class Library {
         System.out.println("Library Users:");
         for (User user : users.values()) {
             System.out.println("Name: " + user.getName() + ", User ID: " + user.getUserId());
+        }
+        System.out.println();
+    }
+
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+    }
+
+    public void removeReservation(Reservation reservation) {
+        reservations.remove(reservation);
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void displayReservations() {
+        System.out.println("Library Reservations:");
+        for (Reservation reservation : reservations) {
+            System.out.println("User ID: " + reservation.getUserId() + ", Book Title: " + reservation.getBookTitle() +
+                    ", Reservation Date: " + reservation.getReservationDate());
         }
         System.out.println();
     }
