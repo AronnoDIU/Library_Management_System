@@ -51,7 +51,16 @@ public class LibraryManagementSystem {
                 case 12: // For display reservation
                     library.displayReservations();
                     break;
-                case 13: // For exit
+                case 13: // For add review
+                    addReview(userInput, library);
+                    break;
+                case 14: // For remove review
+                    removeReview(userInput, library);
+                    break;
+                case 15: // For display review
+                    library.displayReviews();
+                    break;
+                case 16: // For exit
                     saveLibraryToFile(library);
                     System.out.println("Exiting Library Management System. Goodbye!");
                     System.exit(0);
@@ -78,7 +87,10 @@ public class LibraryManagementSystem {
         System.out.println("10. Add Reservation");
         System.out.println("11. Remove Reservation");
         System.out.println("12. Display Reservations");
-        System.out.println("13. Exit");
+        System.out.println("13. Add Review");
+        System.out.println("14. Remove Review");
+        System.out.println("15. Display Reviews");
+        System.out.println("16. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -316,6 +328,47 @@ public class LibraryManagementSystem {
             System.out.println("Reservation removed successfully.\n");
         } else {
             System.out.println("Reservation not found.\n");
+        }
+    }
+
+    private static void addReview(Scanner userInput, Library library) {
+        userInput.nextLine();
+        System.out.print("Enter user ID: ");
+        String userId = userInput.nextLine();
+        System.out.print("Enter book title: ");
+        String bookTitle = userInput.nextLine();
+        System.out.print("Enter review text: ");
+        String reviewText = userInput.nextLine();
+        System.out.print("Enter rating (1-5): ");
+        int rating = userInput.nextInt();
+
+        Review newReview = new Review(userId, bookTitle, reviewText, rating);
+        library.addReview(newReview);
+
+        System.out.println("Review added successfully.\n");
+    }
+
+    private static void removeReview(Scanner userInput, Library library) {
+        library.displayReviews();
+
+        System.out.print("Enter the user ID of the review to remove: ");
+        String userId = userInput.nextLine();
+        System.out.print("Enter the book title of the review to remove: ");
+        String bookTitle = userInput.nextLine();
+
+        Review reviewToRemove = null;
+        for (Review review : library.getReviews()) {
+            if (review.getUserId().equals(userId) && review.getBookTitle().equals(bookTitle)) {
+                reviewToRemove = review;
+                break;
+            }
+        }
+
+        if (reviewToRemove != null) {
+            library.removeReview(reviewToRemove);
+            System.out.println("Review removed successfully.\n");
+        } else {
+            System.out.println("Review not found.\n");
         }
     }
 }

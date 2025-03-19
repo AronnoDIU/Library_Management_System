@@ -7,11 +7,13 @@ class Library {
     private final List<Book> books;
     private final Map<String, User> users;
     private final List<Reservation> reservations;
+    private final List<Review> reviews;
 
     public Library() {
         this.books = new ArrayList<>();
         this.users = new HashMap<>();
         this.reservations = new ArrayList<>();
+        this.reviews = new ArrayList<>();
     }
 
     public void addBook(Book book) {
@@ -93,6 +95,27 @@ class Library {
         for (Reservation reservation : reservations) {
             System.out.println("User ID: " + reservation.getUserId() + ", Book Title: " + reservation.getBookTitle() +
                     ", Reservation Date: " + reservation.getReservationDate());
+        }
+        System.out.println();
+    }
+
+    public void addReview(Review review) {
+        reviews.add(review);
+    }
+
+    public void removeReview(Review review) {
+        reviews.remove(review);
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void displayReviews() {
+        System.out.println("Library Reviews:");
+        for (Review review : reviews) {
+            System.out.println("User ID: " + review.getUserId() + ", Book Title: " + review.getBookTitle() +
+                    ", Review: " + review.getReviewText() + ", Rating: " + review.getRating());
         }
         System.out.println();
     }
