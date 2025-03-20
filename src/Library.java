@@ -8,12 +8,14 @@ class Library {
     private final Map<String, User> users;
     private final List<Reservation> reservations;
     private final List<Review> reviews;
+    private final List<Rating> ratings;
 
     public Library() {
         this.books = new ArrayList<>();
         this.users = new HashMap<>();
         this.reservations = new ArrayList<>();
         this.reviews = new ArrayList<>();
+        this.ratings = new ArrayList<>();
     }
 
     public void addBook(Book book) {
@@ -116,6 +118,27 @@ class Library {
         for (Review review : reviews) {
             System.out.println("User ID: " + review.getUserId() + ", Book Title: " + review.getBookTitle() +
                     ", Review: " + review.getReviewText() + ", Rating: " + review.getRating());
+        }
+        System.out.println();
+    }
+
+    public void addRating(Rating rating) {
+        ratings.add(rating);
+    }
+
+    public void removeRating(Rating rating) {
+        ratings.remove(rating);
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void displayRatings() {
+        System.out.println("Library Ratings:");
+        for (Rating rating : ratings) {
+            System.out.println("User ID: " + rating.getUserId() + ", Book Title: " + rating.getBookTitle() +
+                    ", Rating: " + rating.getRating());
         }
         System.out.println();
     }

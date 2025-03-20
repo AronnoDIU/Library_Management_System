@@ -60,7 +60,16 @@ public class LibraryManagementSystem {
                 case 15: // For display review
                     library.displayReviews();
                     break;
-                case 16: // For exit
+                case 16: // For add rating
+                    addRating(userInput, library);
+                    break;
+                case 17: // For remove rating
+                    removeRating(userInput, library);
+                    break;
+                case 18: // For display rating
+                    library.displayRatings();
+                    break;
+                case 19: // For exit
                     saveLibraryToFile(library);
                     System.out.println("Exiting Library Management System. Goodbye!");
                     System.exit(0);
@@ -90,7 +99,10 @@ public class LibraryManagementSystem {
         System.out.println("13. Add Review");
         System.out.println("14. Remove Review");
         System.out.println("15. Display Reviews");
-        System.out.println("16. Exit");
+        System.out.println("16. Add Rating");
+        System.out.println("17. Remove Rating");
+        System.out.println("18. Display Ratings");
+        System.out.println("19. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -369,6 +381,45 @@ public class LibraryManagementSystem {
             System.out.println("Review removed successfully.\n");
         } else {
             System.out.println("Review not found.\n");
+        }
+    }
+
+    private static void addRating(Scanner userInput, Library library) {
+        userInput.nextLine();
+        System.out.print("Enter user ID: ");
+        String userId = userInput.nextLine();
+        System.out.print("Enter book title: ");
+        String bookTitle = userInput.nextLine();
+        System.out.print("Enter rating (1-5): ");
+        int rating = userInput.nextInt();
+
+        Rating newRating = new Rating(userId, bookTitle, rating);
+        library.addRating(newRating);
+
+        System.out.println("Rating added successfully.\n");
+    }
+
+    private static void removeRating(Scanner userInput, Library library) {
+        library.displayRatings();
+
+        System.out.print("Enter the user ID of the rating to remove: ");
+        String userId = userInput.nextLine();
+        System.out.print("Enter the book title of the rating to remove: ");
+        String bookTitle = userInput.nextLine();
+
+        Rating ratingToRemove = null;
+        for (Rating rating : library.getRatings()) {
+            if (rating.getUserId().equals(userId) && rating.getBookTitle().equals(bookTitle)) {
+                ratingToRemove = rating;
+                break;
+            }
+        }
+
+        if (ratingToRemove != null) {
+            library.removeRating(ratingToRemove);
+            System.out.println("Rating removed successfully.\n");
+        } else {
+            System.out.println("Rating not found.\n");
         }
     }
 }
