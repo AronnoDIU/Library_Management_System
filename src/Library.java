@@ -9,6 +9,7 @@ class Library {
     private final List<Reservation> reservations;
     private final List<Review> reviews;
     private final List<Rating> ratings;
+    private final List<Recommendation> recommendations;
 
     public Library() {
         this.books = new ArrayList<>();
@@ -16,6 +17,7 @@ class Library {
         this.reservations = new ArrayList<>();
         this.reviews = new ArrayList<>();
         this.ratings = new ArrayList<>();
+        this.recommendations = new ArrayList<>();
     }
 
     public void addBook(Book book) {
@@ -139,6 +141,27 @@ class Library {
         for (Rating rating : ratings) {
             System.out.println("User ID: " + rating.getUserId() + ", Book Title: " + rating.getBookTitle() +
                     ", Rating: " + rating.getRating());
+        }
+        System.out.println();
+    }
+
+    public void addRecommendation(Recommendation recommendation) {
+        recommendations.add(recommendation);
+    }
+
+    public void removeRecommendation(Recommendation recommendation) {
+        recommendations.remove(recommendation);
+    }
+
+    public List<Recommendation> getRecommendations() {
+        return recommendations;
+    }
+
+    public void displayRecommendations() {
+        System.out.println("Library Recommendations:");
+        for (Recommendation recommendation : recommendations) {
+            System.out.println("User ID: " + recommendation.getUserId() + ", Book Title: " + recommendation.getBookTitle() +
+                    ", Recommendation: " + recommendation.getRecommendationText());
         }
         System.out.println();
     }

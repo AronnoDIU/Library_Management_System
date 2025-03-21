@@ -69,7 +69,16 @@ public class LibraryManagementSystem {
                 case 18: // For display rating
                     library.displayRatings();
                     break;
-                case 19: // For exit
+                case 19: // For add recommendation
+                    addRecommendation(userInput, library);
+                    break;
+                case 20: // For remove recommendation
+                    removeRecommendation(userInput, library);
+                    break;
+                case 21: // For display recommendation
+                    library.displayRecommendations();
+                    break;
+                case 22: // For exit
                     saveLibraryToFile(library);
                     System.out.println("Exiting Library Management System. Goodbye!");
                     System.exit(0);
@@ -102,7 +111,10 @@ public class LibraryManagementSystem {
         System.out.println("16. Add Rating");
         System.out.println("17. Remove Rating");
         System.out.println("18. Display Ratings");
-        System.out.println("19. Exit");
+        System.out.println("19. Add Recommendation");
+        System.out.println("20. Remove Recommendation");
+        System.out.println("21. Display Recommendations");
+        System.out.println("22. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -420,6 +432,45 @@ public class LibraryManagementSystem {
             System.out.println("Rating removed successfully.\n");
         } else {
             System.out.println("Rating not found.\n");
+        }
+    }
+
+    private static void addRecommendation(Scanner userInput, Library library) {
+        userInput.nextLine();
+        System.out.print("Enter user ID: ");
+        String userId = userInput.nextLine();
+        System.out.print("Enter book title: ");
+        String bookTitle = userInput.nextLine();
+        System.out.print("Enter recommendation text: ");
+        String recommendationText = userInput.nextLine();
+
+        Recommendation newRecommendation = new Recommendation(userId, bookTitle, recommendationText);
+        library.addRecommendation(newRecommendation);
+
+        System.out.println("Recommendation added successfully.\n");
+    }
+
+    private static void removeRecommendation(Scanner userInput, Library library) {
+        library.displayRecommendations();
+
+        System.out.print("Enter the user ID of the recommendation to remove: ");
+        String userId = userInput.nextLine();
+        System.out.print("Enter the book title of the recommendation to remove: ");
+        String bookTitle = userInput.nextLine();
+
+        Recommendation recommendationToRemove = null;
+        for (Recommendation recommendation : library.getRecommendations()) {
+            if (recommendation.getUserId().equals(userId) && recommendation.getBookTitle().equals(bookTitle)) {
+                recommendationToRemove = recommendation;
+                break;
+            }
+        }
+
+        if (recommendationToRemove != null) {
+            library.removeRecommendation(recommendationToRemove);
+            System.out.println("Recommendation removed successfully.\n");
+        } else {
+            System.out.println("Recommendation not found.\n");
         }
     }
 }
