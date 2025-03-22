@@ -83,7 +83,14 @@ class Library {
     }
 
     public void addReservation(Reservation reservation) {
-        reservations.add(reservation);
+        Book book = findBook(reservation.getBookTitle());
+        if (book != null && !book.isCheckedOut()) {
+            book.addReservation(reservation);
+            reservations.add(reservation);
+            System.out.println("Reservation added successfully.");
+        } else {
+            System.out.println("Book is not available for reservation.");
+        }
     }
 
     public void removeReservation(Reservation reservation) {

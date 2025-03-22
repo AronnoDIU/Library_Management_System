@@ -20,4 +20,8 @@ class Reservation {
     public String getReservationDate() {
         return reservationDate;
     }
+
+    public boolean isActive() {
+        return true;
+    }
 }
